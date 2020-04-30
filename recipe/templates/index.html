@@ -1,0 +1,12 @@
+<h1>Recipe Box!</h1>
+
+<ul>
+    {% for recipe in data %}
+        <li>
+        <h3><a href="{% url 'recipe' %}">{{recipe.title}}</a></h3>
+        </li>
+    {% endfor %}
+</ul>
+
+
+
