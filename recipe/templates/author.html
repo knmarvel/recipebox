@@ -1,14 +1,10 @@
-<h1>Author BIO</h1>
+<h1>Author Detail</h1>
 
 <ul>
     {% for recipe in data %}
-        <li>
-        <h3>{{recipe.author.name}}</h3> 
-        </li>
-        <li>
+    <h3>{{recipe.author.name}}</h3> 
         {{recipe.author.bio}}
-        </li>
-</ul>
     {% endfor %}
+</ul>
 
 <a href="{% url 'index' %}">Home Page</a>
