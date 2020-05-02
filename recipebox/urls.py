@@ -23,7 +23,7 @@ urlpatterns = [
     # path('', views.index)
     path('admin/', admin.site.urls),
     path('home/', views.index, name='index'),
-    path('author/', views.author, name='author'),
-    path('recipe/', views.recipe, name='recipe'),
+    path('author/<int:id>/', views.author, name='author'),
+    path('recipe/<int:id>/', views.recipe, name='recipe'),
 ]
 urlpatterns += recipe_urls

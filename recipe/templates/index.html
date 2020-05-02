@@ -3,7 +3,7 @@
 <ul>
     {% for recipe in data %}
         <li>
-        <h3><a href="{% url 'recipe' %}">{{recipe.title}}</a></h3>
+        <h3><a href="{% url 'recipe' id=recipe.id %}">{{recipe.title}}</a></h3>
         </li>
     {% endfor %}
 </ul>
