@@ -13,6 +13,11 @@ class AddAuthorForm(forms.ModelForm):
         model = Author
         fields = ['name', 'bio']
 
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+
 """
 
 # Create your models here.

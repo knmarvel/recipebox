@@ -1,5 +1,7 @@
 <h1>Recipe Box!</h1>
 
+Are you logged in? {{ request.user.is_authenticated }}
+
 <ul>
     {% for recipe in data %}
         <li>
@@ -11,6 +13,6 @@
 <a href="{% url 'add_recipe' %}">Add recipe here!</a>
 </p>
 <p>
-<a href="{% url 'add_author' %}">Add your Bio here!</a>
+<a href="{% url 'add_author' %}">Add your author's information here!</a>
 </p>
 

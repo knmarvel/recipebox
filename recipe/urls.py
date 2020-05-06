@@ -8,5 +8,6 @@ urlpatterns = [
     path('add_author/', views.add_author),
     path('author/<int:id>/', views.author),
     path('recipe/<int:id>/', views.recipe),
+    path('login/', views.loginview)
    # path('admin/', admin.site.urls),
 ]
