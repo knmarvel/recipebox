@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from recipe.urls import urlpatterns as recipe_urls
-from recipe import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
