@@ -29,7 +29,7 @@ def index(request):
 
 @login_required
 def add_recipe(request):
-    html = "add_recipe.html"
+    html = "generic_form.html"
 
     if request.method == "POST":
         form = AddRecipeForm(request.POST)
@@ -50,7 +50,7 @@ def add_recipe(request):
 
 @login_required
 def add_author(request):
-    html = "add_author.html"
+    html = "generic_form.html"
 
     if request.method == "POST":
         form = AddAuthorForm(request.POST)
@@ -73,15 +73,9 @@ def recipe(request, id):
     return render(request, 'recipe.html', {'recipe':recipe})
 
 def logoutview(request):
-    if logout(request):
-        return HttpResponseRedirect(reverse('homepage'))
-    return render(request, 'logout.html', {})
+    logout(request)
+    return HttpResponseRedirect(reverse('homepage'))
+    # return HttpResponseRedirect(reverse('logoutURL'))
 
-# @receiver(user_logged_out)
-# def on_user_logged_out(sender, request, **kwargs):
-#     messages.add_message(request, messages.INFO, 'Logged out!')
-# def logoutview(request):
-#     logout(request)
-#     loginview.info(request, "Logged out successfully")
-#     return HttpResponseRedirect("main:homepage")
+
 
