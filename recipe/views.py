@@ -22,7 +22,6 @@ def loginview(request):
     form = LoginForm()
     return render(request, 'generic_form.html', {'form': form})
 
-# Create your views here.
 def index(request):
     data = RecipeItem.objects.all()
     author = Author.objects.all()
@@ -73,4 +72,16 @@ def recipe(request, id):
     recipe = RecipeItem.objects.get(id=id)
     return render(request, 'recipe.html', {'recipe':recipe})
 
+def logoutview(request):
+    if logout(request):
+        return HttpResponseRedirect(reverse('homepage'))
+    return render(request, 'logout.html', {})
+
+# @receiver(user_logged_out)
+# def on_user_logged_out(sender, request, **kwargs):
+#     messages.add_message(request, messages.INFO, 'Logged out!')
+# def logoutview(request):
+#     logout(request)
+#     loginview.info(request, "Logged out successfully")
+#     return HttpResponseRedirect("main:homepage")
 
