@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import User
 
 from recipe.models import RecipeItem, Author
 from recipe.forms import AddRecipeForm, AddAuthorForm, LoginForm
@@ -54,11 +55,20 @@ def add_author(request):
     form = AddAuthorForm()
     if request.method == "POST":
         form = AddAuthorForm(request.POST)
-        form.save()
-        return HttpResponseRedirect(reverse('homepage'))
+        if form.is_valid():
+            data = form.cleaned_data
+            # Matt Perry assisted with this portion of extending the addauthor to include user
+            new_user = User.objects.create_user(
+                username=data['name'] 
+            )
+            
+            new_author = Author.objects.create(
+                name=data['name'],bio=data['bio'],user=new_user)
+            new_author.save()
+            return HttpResponseRedirect(reverse('homepage'))    
+
     
     if request.user.is_staff:
-        form = AddAuthorForm()
         return render(request, html, {'form': form})
     return render(request, 'no_access.html')
 

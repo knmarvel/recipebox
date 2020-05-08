@@ -7,11 +7,13 @@ class AddRecipeForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea)
     time_required = forms.CharField(max_length=30)
     instructions = forms.CharField(widget=forms.Textarea)
+    # user = forms.CharField(max_length=30)
+    # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
 
 class AddAuthorForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields = ['name', 'bio', 'user'
+        fields = ['name', 'bio',
         ]
 
 class LoginForm(forms.Form):
