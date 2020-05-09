@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Author(models.Model):
     name = models.CharField(max_length=30)
     # password = models.CharField(max_length=30)
@@ -13,6 +14,7 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+
 class RecipeItem(models.Model):
     title = models.CharField(max_length=30)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -20,5 +22,3 @@ class RecipeItem(models.Model):
     time_required = models.CharField(max_length=30)
     instructions = models.TextField()
     date = models.DateTimeField(default=timezone.now)
-
-
