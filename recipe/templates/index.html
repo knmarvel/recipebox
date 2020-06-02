@@ -1,5 +1,15 @@
 <h1>Recipe Box!</h1>
 
+Are you logged in? {{ request.user.is_authenticated }}
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
 <ul>
     {% for recipe in data %}
         <li>
@@ -7,6 +17,10 @@
         </li>
     {% endfor %}
 </ul>
-
-
+<p>
+<a href="{% url 'add_recipe' %}">Add recipe here!</a>
+</p>
+<p>
+<a href="{% url 'add_author' %}">Add your author's information here!</a>
+</p>
 
