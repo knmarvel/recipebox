@@ -21,4 +21,4 @@ class RecipeItem(models.Model):
     time_required = models.CharField(max_length=30)
     instructions = models.TextField()
     date = models.DateTimeField(default=timezone.now)
-    favorited_by = models.ManyToManyField(Author)
+    favorited_by = models.ManyToManyField(Author, related_name="fav")
