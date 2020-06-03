@@ -35,14 +35,21 @@ def add_recipe(request):
     if request.user.is_staff:
         if request.method == "POST":
             form = AddRecipeForm(request.POST)
-            form.save()
-            return HttpResponseRedirect(reverse('homepage'))
+            if form.is_valid():
+                data = form.cleaned_data
+                RecipeItem.objects.create(
+                    title=data['title'],
+                    author=data['author'],
+                    description=data['description'],
+                    time_required=data['time_required'],
+                    instructions=data['instructions'],
+                )
+                return HttpResponseRedirect(reverse('homepage'))
     if not request.user.is_staff:
         form = NotStaffRecipeForm(request.POST)
-
         if request.method == "POST" and form.is_valid():
             data = form.cleaned_data
-            non_staff_author = RecipeItem.objects.create(
+            RecipeItem.objects.create(
                 title=data['title'],
                 author=request.user.author,
                 description=data['description'],
@@ -94,6 +101,5 @@ def loginview(request):
 
 
 def logoutview(request):
-    if logout(request):
-        return HttpResponseRedirect(reverse('homepage'))
-    return render(request, 'generic_form.html', {})
+    logout(request)
+    return HttpResponseRedirect(reverse('homepage'))

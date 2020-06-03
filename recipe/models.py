@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 
 class Author(models.Model):
     name = models.CharField(max_length=30)
-    # password = models.CharField(max_length=30)
     bio = models.TextField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -22,3 +21,4 @@ class RecipeItem(models.Model):
     time_required = models.CharField(max_length=30)
     instructions = models.TextField()
     date = models.DateTimeField(default=timezone.now)
+    favorited_by = models.ManyToManyField(Author)
