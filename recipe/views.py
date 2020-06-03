@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, HttpResponseRedirect
+from django.shortcuts import render, redirect, reverse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -25,7 +25,34 @@ def author(request, id):
 
 def recipe(request, id):
     recipe = RecipeItem.objects.get(id=id)
-    return render(request, 'recipe.html', {'recipe': recipe})
+    fav = False
+    if request.user.is_authenticated:
+        if request.user in Author.user.get_queryset():
+            author = Author.objects.get(user=request.user)
+            if recipe in author.favorites.all():
+                fav = True
+    return render(request, 'recipe.html', {
+        'recipe': recipe,
+        'fav': fav
+        })
+
+
+@login_required
+def favorite(request, id):
+    this_recipe = RecipeItem.objects.get(id=id)
+    author = Author.objects.get(user=request.user)
+    author.favorites.add(this_recipe)
+    author.save()
+    return redirect(recipe, id=this_recipe.id)
+
+
+@login_required
+def unfavorite(request, id):
+    this_recipe = RecipeItem.objects.get(id=id)
+    author = Author.objects.get(user=request.user)
+    author.favorites.remove(this_recipe)
+    author.save()
+    return redirect(recipe, id=this_recipe.id)
 
 
 @login_required

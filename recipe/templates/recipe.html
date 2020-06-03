@@ -19,7 +19,18 @@
                 <li>
                 {{recipe.instructions}}
                 </li>
-<p>                
+                <li>
+                    {% if user.is_authenticated %}
+                        {% if not fav %}
+                            <a href="{% url 'favorite' id=recipe.id %}"><button>Add to favorites</button></a>
+                        {% else %}
+                            <a href="{% url 'unfavorite' id=recipe.id %}"><button>Remove from favorites</button></a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'login' %}">Log in to favorite this recipe.</a>
+                    {% endif %}
+                </li>
+<p>             
 <a href="{% url 'homepage' %}">Home Page</a>
 </p>
 </ul>            
