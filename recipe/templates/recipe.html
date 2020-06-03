@@ -26,6 +26,11 @@
                         {% else %}
                             <a href="{% url 'unfavorite' id=recipe.id %}"><button>Remove from favorites</button></a>
                         {% endif %}
+                </li>
+                <li>
+                        {% if request.user == recipe.author.user or request.user.is_staff %}
+                            <a href="{% url 'edit' id=recipe.id %}">Edit this recipe</a>
+                        {% endif %}
                     {% else %}
                         <a href="{% url 'login' %}">Log in to favorite this recipe.</a>
                     {% endif %}
